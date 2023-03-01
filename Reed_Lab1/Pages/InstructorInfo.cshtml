@@ -1,0 +1,47 @@
+﻿@page
+@using System.Data.SqlClient
+@using Reed_Lab1.Pages.DB
+@model Reed_Lab1.Pages.InstructorInfoModel
+@{
+}
+
+<h2 class="h2">Student Meetings:</h2>
+<table class="table table-bordered table-responsive table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Student Name:</th>
+            <th>Meeting Purpose:</th>
+            <th>With Instrucor:</th>
+            <th>Scheduled Time:</th>
+            <th>Office Location:</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            string sqlQuery = @"SELECT Student.StudentName, Meeting.MeetingPurpose, Instructor.InstructorName, OfficeAppointment.OfficeHours, OfficeAppointment.OfficeLocation
+                FROM Instructor
+                INNER JOIN OfficeAppointment
+                on Instructor.InstructorID = OfficeAppointment.OfficeNum
+                INNER JOIN Meeting
+                on Instructor.InstructorID = Meeting.InstructorID
+                LEFT JOIN Student
+                on Student.StudentID = Meeting.StudentID
+                WHERE Instructor.User1 = '" + HttpContext.Session.GetString("username") + "'";
+            SqlDataReader InfoReader = DBClass.GeneralReaderQuery(sqlQuery);
+
+            while (InfoReader.Read())
+            {
+                <tr>
+                    <td>@InfoReader["StudentName"]</td>
+                    <td>@InfoReader["MeetingPurpose"]</td>
+                    <td>@InfoReader["InstructorName"]</td>
+                    <td>@InfoReader["OfficeHours"]</td>
+                    <td>@InfoReader["OfficeLocation"]</td>
+                </tr>
+            }
+
+            DBClass.Lab3DBConnection.Close();
+    
+        }
+    </tbody>
+</table>

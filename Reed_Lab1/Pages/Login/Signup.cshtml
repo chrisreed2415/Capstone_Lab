@@ -1,0 +1,38 @@
+﻿@page
+@model Reed_Lab1.Pages.Login.SignupModel
+@{
+}
+
+<form asp-page="Signup">
+    <label>Enter New Username:</label>
+    <input asp-for="Username" class="form-control" type="username" />
+    <br />
+    <label>Enter New Password:</label>
+    <input asp-for="Password" class="form-control" type="password" />
+    <br />
+    <label>Choose New User Type:</label>
+    <br />
+    <select asp-for="SelectedUser" class="form-select">
+        <option value="student">Student</option>
+        <option value="Instructor">Instructor</option>
+    </select>
+    <br />
+    <label>Enter Full Name:</label>
+    <input asp-for="Fullname" class="form-control" type="text" />
+    <br />
+    <label>Enter Email Address:</label>
+    <input asp-for="Email" class="form-control" type="email" />
+    <br />
+    <label>Enter Phone Number(000-000-000):</label>
+    <input asp-for="Telephone" class="form-control" type="tel" />
+    <br />
+    <input type="submit" class="btn btn-primary" />
+</form>
+
+@{
+    if (ViewData["UserCreate"] != null)
+    {
+        <p class="text-success">@ViewData["UserCreate"]</p>
+    }
+
+}

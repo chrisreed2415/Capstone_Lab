@@ -1,0 +1,17 @@
+﻿@page
+@model Reed_Lab1.Pages.SummaryModel
+@{
+}
+
+<h1>To Get Into Queue. Select a Faculty Available!</h1>
+<br />
+
+<form asp-action="Summary">
+    <p>Choose Instructor For Office Hours:</p>
+    <br />
+    <select asp-for="InstructorID" asp-items="Model.Instructors">
+        <option value="">Choose a Instructor</option>
+    </select>
+    <button class="btn btn-primary">Submit Selection</button>
+</form>
+

@@ -1,0 +1,36 @@
+﻿@page
+@model Reed_Lab1.Pages.Login.LoginModel
+@{
+}
+
+
+<form asp-page="Login">
+    <label>Enter Username:</label>
+    <input asp-for="Username" class="form-control" type="username" />
+    <br />
+    <label>Enter Password:</label>
+    <input asp-for="Password" class="form-control" type="password" />
+    <br />
+    <label>Choose User Type:</label>
+    <br />
+    <select asp-for="SelectedUser" class="form-select">
+        <option value="student">Student</option>
+        <option value="Instructor">Instructor</option>
+    </select>
+    <br />
+    <input type="submit" class="btn btn-primary" />
+    <br />
+    <label>Dont Have an Account? Sign up for one now!</label>
+    <a asp-page="Signup" class="btn btn-secondary">SignUp</a>
+</form>
+<br />
+@{
+    if (HttpContext.Session.GetString("username") != null)
+    {
+        <p class="text-success">@ViewData["LoginMessage"]</p>
+    }
+    else
+    {
+        <p class="text-danger">@ViewData["LoginMessage"]</p>
+    }
+}

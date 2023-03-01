@@ -1,0 +1,41 @@
+﻿@page
+@model Reed_Lab1.Pages.FindInstructorModel
+@{
+    ViewData["Title"] = "Directory";
+}
+
+<h1>Select a Faculty</h1>
+<br />
+
+
+
+    
+<form asp-page-handler="SingleSelect" method="post">
+    <select asp-for="SelectedNumber" class="form-select">
+        @{
+            foreach (var instructor in Model.InstructNames)
+            {
+                <option value="@instructor.InstructorID">@instructor.InstructorName</option>
+            }
+        }
+    </select>
+    <br />
+    <button class="btn btn-primary">Submit Selection</button>
+
+</form>
+@if (Model.SelectMessage != null)
+{
+    <br />
+    <p>@Model.SelectMessage</p>
+    <a asp-page="Office" class="btn btn-primary" asp-route-instructorid="@Model.SelectedNumber">View Office Hours</a>
+    <br />
+    <br />
+}
+@if (Model.SelectMessage == null)
+{
+    <br />
+    <p>Please select an instructor</p>
+    <a asp-page="SingleSelect"></a>
+
+}
+<a asp-page="SingleSelect">Clear</a>

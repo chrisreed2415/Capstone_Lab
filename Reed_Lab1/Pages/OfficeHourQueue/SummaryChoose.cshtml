@@ -1,0 +1,16 @@
+﻿@page
+@model Reed_Lab1.Pages.OfficeHourQueue.SummaryChooseModel
+@{
+}
+
+<h1>View Instructors Office Hours Queue Time</h1>
+<br />
+
+<form asp-action="Summary">
+    <p>Select an Instructor to View The Queue:</p>
+    <br />
+    <select asp-for="InstructorID" asp-items="Model.Instructors">
+        <option value="">Choose a Instructor</option>
+    </select>
+    <button class="btn btn-primary">Submit Selection</button>
+</form>

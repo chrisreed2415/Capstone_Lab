@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+@{
+    if (Context.Session.GetString("username") != null)
+    {
+        <form method="post" class="form-inline text-black">
+            User @Context.Session.GetString("username")
+            <a class="btn btn-outline-primary text-white" asp-page="/Login/Login" asp-route-logout="true">Logout</a>
+        </form>
+    }
+    else
+    {
+        <a class="btn btn-link" asp-page="/Login/Login">Login</a>
+        <a class="btn btn-link" asp-page="/Login/Signup">Signup</a>
+    }
+}

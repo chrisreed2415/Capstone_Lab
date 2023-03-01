@@ -1,0 +1,51 @@
+﻿@page
+@using System.Data.SqlClient
+@using Reed_Lab1.Pages.DB
+@model Reed_Lab1.Pages.OfficeHourQueue.InstructorQueueModel
+@{
+}
+
+
+<h2 class="h2">@HttpContext.Session.GetString("username") Queue List:</h2>
+<table class="table table-bordered table-responsive table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Student Name:</th>
+            <th>Office Location:</th>
+            <th>Time Stamp:</th>
+            <th>Time Range:</th>
+            <th>Process:</th>
+            <th>Action:</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            string sqlQuery = @"SELECT Student.StudentName, Queue.QueueID, OfficeAppointment.OfficeLocation, Queue.Time, Queue.ProcessState, Queue.TimeRange
+            FROM Queue
+            INNER JOIN Student
+            on Student.StudentID = Queue.StudentID
+            LEFT JOIN OfficeAppointment
+            on OfficeAppointment.OfficeNum = Queue.OfficeNum
+            Where Queue.InstructorID =" + HttpContext.Session.GetInt32("instructorid") + "Order by Time ASC";
+            SqlDataReader InfoReader = DBClass.GeneralReaderQuery(sqlQuery);
+
+            while (InfoReader.Read())
+            {
+                        <tr>
+                            <td>@InfoReader["StudentName"]</td>
+                            <td>@InfoReader["OfficeLocation"]</td>
+                            <td>@InfoReader["Time"]</td>
+                            <td>@InfoReader["TimeRange"]</td>
+                            <td>@InfoReader["ProcessState"]</td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" href="/OfficeHourQueue/Checkin?id=@InfoReader["QueueID"]">Check-In</a>
+                                <a class="btn btn-danger btn-sm" href="/OfficeHourQueue/Delete?id=@InfoReader["QueueID"]">Remove</a>
+                            </td>
+                        </tr>
+            }
+
+            DBClass.Lab3DBConnection.Close();
+
+        }
+    </tbody>
+</table>

@@ -1,0 +1,26 @@
+﻿@page
+@using System.Data.SqlClient
+@using Reed_Lab1.Pages.DB
+@model Reed_Lab1.Pages.OfficeAppointmentModel
+@{
+}
+
+
+<form asp-action="OfficeAppointment">
+    <p>Get in Queue of Office Hours:</p>
+    <br />
+    <select asp-for="OfficeA" asp-items="Model.OfficeH">
+        <option value="">Choose Office Hours</option>
+    </select>
+    <br />
+    <br />
+    <input asp-for="OptionMin" type="radio" value="15min" /> Option 1: 15minutes<br />
+    <input asp-for="OptionMin" type="radio" value="30min" /> Option 2: 30minutes<br />
+    <br />
+    <button class="btn btn-primary">Submit Selection</button>
+    @if (Model.SelectMessage != null)
+    {
+        <p>@Model.SelectMessage</p>
+    }
+</form>
+

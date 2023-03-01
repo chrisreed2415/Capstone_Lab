@@ -1,0 +1,35 @@
+﻿@page
+@using System.Data.SqlClient
+@using Reed_Lab1.Pages.DB
+@model Reed_Lab1.Pages.OfficeHourQueue.NotifsModel
+@{
+}
+
+<h2 class="h2">@HttpContext.Session.GetString("username") Inbox:</h2>
+<table class="table table-bordered table-responsive table-hover table-info">
+    <thead class="table-light">
+        <tr>
+            <th>Message:</th>
+            <th>Info:</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            string sqlQuery = @"SELECT *
+            FROM NOTIF
+            WHERE StudentID =" + HttpContext.Session.GetInt32("studentid");
+            SqlDataReader InfoReader = DBClass.GeneralReaderQuery(sqlQuery);
+
+            while (InfoReader.Read())
+            {
+                <tr>
+                    <td>@InfoReader["Message"]</td>
+                    <td>@InfoReader["ProcessChange"]</td>
+                </tr>
+            }
+
+            DBClass.Lab3DBConnection.Close();
+
+        }
+    </tbody>
+</table>

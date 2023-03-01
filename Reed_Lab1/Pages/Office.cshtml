@@ -1,0 +1,43 @@
+﻿@page 
+@model Reed_Lab1.Pages.OfficeModel
+@{
+    ViewData["Title"] = "Office";
+}
+
+<h1>Select Office Hours</h1>
+<br />
+
+
+
+
+<form asp-page-handler="SingleSelect" method="post">
+<select asp-for="SelectedOffice" class="form-select">
+        @{
+            foreach (var officeAppointment in Model.OfficeHour)
+            {
+                <option value="@officeAppointment.OfficeNum">@officeAppointment.OfficeHours</option>
+            }
+        }
+</select>
+    <br />
+    <button class="btn btn-primary">Submit</button>
+</form>
+
+@if (Model.SelectMessage != null)
+{
+    <br />
+    <p>@Model.SelectMessage</p>
+    <a asp-page="Meeting" class="btn btn-primary" asp-route-officeid="@Model.SelectedOffice">View Meeting</a>
+    <br />
+    <br />
+}
+@if (Model.SelectMessage == null)
+{
+    <br />
+    <p>Please select Office Hours</p>
+    <a asp-page="SingleSelect"></a>
+
+}
+<a asp-page="SingleSelect">Clear</a>
+
+

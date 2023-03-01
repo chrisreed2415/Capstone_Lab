@@ -1,0 +1,17 @@
+﻿@page
+@model Reed_Lab1.Pages.MeetingModel
+
+@{
+}
+
+
+    <form asp-page="Meeting">
+        <input asp-for="MeetingEntry.MeetingPurpose" placeholder="Meeting Purpose?" />
+        <br />
+        <input type="submit" value="Create" class="btn btn-primary" />
+        <a asp-page="Meeting">Clear</a>
+        <button asp-page="Meeting" asp-page-handler="PopulateHandler" formnovalidate>Populate</button>
+
+    </form>
+
+

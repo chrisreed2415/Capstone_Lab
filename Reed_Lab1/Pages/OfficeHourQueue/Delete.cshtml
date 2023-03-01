@@ -1,0 +1,16 @@
+﻿@page
+@using System.Data.SqlClient
+@using Reed_Lab1.Pages.DB
+@model Reed_Lab1.Pages.OfficeHourQueue.DeleteModel
+@{
+}
+
+@{
+    String id = Request.Query["id"];
+    String sqlQuery1 = "DELETE FROM NOTIF WHERE QueueID =" + id;
+    DBClass.GeneralReaderQuery(sqlQuery1);
+    String sqlQuery = "DELETE FROM Queue WHERE QueueID =" + id;
+    DBClass.GeneralReaderQuery(sqlQuery);
+
+    Response.Redirect("/OfficeHourQueue/InstructorQueue");
+}

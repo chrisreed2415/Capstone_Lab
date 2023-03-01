@@ -1,0 +1,43 @@
+﻿@page
+@using Microsoft.AspNetCore.Http;
+
+@*Christopher Reed & Johnathan Deavers - 02/19/2023*@
+
+@model Reed_Lab1.Pages.IndexModel
+@{
+}
+@{
+    //if (Context.Session.GetString("username") != null)
+    @*if (User == null)*@
+    if (HttpContext.Session.GetString("username") == null)
+    {
+        <br />
+        <h1>
+            Welcome User to Christopher Reed & Johnathan Deavers Site!
+        </h1>
+        <h1>
+            Please log in to get started!
+        </h1>
+    }
+    if (HttpContext.Session.GetString("username") != null)
+    {
+        <br />
+        <h1>
+            Welcome back @HttpContext.Session.GetString("username")!
+        </h1>
+        <br />
+        <h2>
+            This is the home page, please click on one of the links above
+            in the navigation page to get started or logout just below.
+        </h2>
+    }
+    <br />
+    <br />
+    <body class=text-center>
+        <button type="button" class="btn-lg" style="background:aliceblue;color:cornflowerblue">
+            <partial name="_LoginStatusPartial" />
+        </button>
+
+    </body>
+
+}
